@@ -1,0 +1,3 @@
+[submodule "baselines/videotree"]
+	path = baselines/videotree
+	url = https://github.com/Ziyang412/VideoTree.git
