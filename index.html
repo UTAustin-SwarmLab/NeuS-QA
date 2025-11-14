@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="description"
-        content="Neuro-Symbolic Evaluation of Text-to-Video Models using Formal Verification">
+        content="NeuS-QA: Grounding Long-Form Video Understanding in Temporal Logic and Neuro-Symbolic Reasoning">
   <meta name="keywords" content="video, understanding, reasoning, neuro-symbolic, ai, temporal, logic, formal, methods">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Neuro-Symbolic Evaluation of Text-to-Video Models using Formal Verification</title>
+  <title>NeuS-QA: Grounding Long-Form Video Understanding in Temporal Logic and Neuro-Symbolic Reasoning</title>
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
         rel="stylesheet">
@@ -61,6 +61,9 @@
           <a class="navbar-item" href="https://utaustin-swarmlab.github.io/NeuS-V">
             NeuS-V
           </a>
+          <a class="navbar-item" href="https://utaustin-swarmlab.github.io/NeuS-QA">
+            NeuS-QA
+          </a>
         </div>
       </div>
     </div>
@@ -72,28 +75,30 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Neuro-Symbolic Evaluation of Text-to-Video Models using Formal Verification</h1>
+          <h1 class="title is-1 publication-title">NeuS-QA: Grounding Long-Form Video Understanding in Temporal Logic and Neuro-Symbolic Reasoning</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              S P Sharan<sup>&dagger;</sup>,</span>
+              Sahil Shah<sup>1</sup>,</span>
             <span class="author-block">
-              Minkyu Choi<sup>&dagger;</sup>,</span>
+              S P Sharan<sup>&dagger; 1</sup>,</span>
             <span class="author-block">
-              Sahil Shah,
-            </span>
+              Harsh Goel<sup>&dagger; 1</sup>,</span>
             <span class="author-block">
-              Harsh Goel,
-            </span>
+              Minkyu Choi<sup>1</sup>,</span>
             <span class="author-block">
-              Mohammad Omama,
-            </span>
+              Mustafa Munir<sup>1</sup>,</span>
             <span class="author-block">
-              Sandeep Chinchali
+              Manvik Pasula<sup>2</sup>,</span>
+            <span class="author-block">
+              Radu Marculescu<sup>1</sup>,</span>
+            <span class="author-block">
+              Sandeep Chinchali<sup>1</sup>
             </span>
           </div>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">The University of Texas at Austin</span>
+            <span class="author-block"><sup>1</sup>The University of Texas at Austin, USA</span>
+            <span class="author-block"><sup>2</sup>Independent Researcher, USA</span>
           </div>
           <div class="is-size-5 publication-authors">
             <span class="author-block">&dagger;Contributed equally to this work</span>
@@ -101,7 +106,7 @@
           <div class="column has-text-centered">
             <div class="publication-links">
               <span class="link-block">
-                <a href="https://openaccess.thecvf.com/content/CVPR2025/html/Sharan_Neuro-Symbolic_Evaluation_of_Text-to-Video_Models_using_Formal_Verification_CVPR_2025_paper.html"
+                <a href="https://arxiv.org/pdf/2509.18041"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fas fa-file-pdf"></i>
@@ -110,7 +115,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://arxiv.org/abs/2411.16718"
+                <a href="https://arxiv.org/abs/2509.18041"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -119,7 +124,7 @@
                 </a>
               </span>
               <span class="link-block">
-                <a href="https://github.com/UTAustin-SwarmLab/NeuS-V"
+                <a href="https://github.com/UTAustin-SwarmLab/NeuS-QA"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="fab fa-github"></i>
@@ -127,25 +132,14 @@
                   <span>Source Code</span>
                   </a>
               </span>
-              <span class="link-block">
-                <a href="https://huggingface.co/spaces/Syzygianinfern0/NeuS-V"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <img src="static/images/huggingface.svg" style="height: 1em; vertical-align: middle;">
-                  </span>
-                  <span>Hugging Face</span>
-                  </a>
-              </span>
+
             </div>
         </div>
         <br></br>
-        <!-- <img src="static/images/poster.jpg" alt="CVPR Poster" class="zoomable-image"> -->
-        <figure style="text-align: center;">
-            <img src="static/images/poster.jpg" alt="CVPR Poster" class="zoomable-image">
-              <figcaption style="color: #666; font-style: italic; font-size: 0.9em; margin-top: 8px;">
-                Our CVPR Poster
-            </figcaption>
-        </figure>
+        <div class="columns is-centered">
+          <div class="column is-two-thirds">
+            <img src="static/images/teaser.png" class="zoomable-image">
+          </div>
         </div>
     </div>
   </div>
@@ -153,126 +147,20 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
+        <h2 class="title is-3">Method Overview</h2>
         <div class="content has-text-justified">
           <p>
-  Recent advancements in text-to-video models such as Sora, Gen-3, MovieGen, and CogVideoX are pushing the boundaries of synthetic video generation, with adoption seen in fields like robotics, autonomous driving, and entertainment. As these models become prevalent, various metrics and benchmarks have emerged to evaluate the quality of the generated videos. However, these metrics emphasize visual quality and smoothness, neglecting temporal fidelity and text-to-video alignment, which are crucial for safety-critical applications.
+            While vision-language models (VLMs) excel at tasks involving single images or short videos, they still struggle with Long Video Question Answering (LVQA) due to its demand for complex multi-step temporal reasoning. Vanilla approaches, which simply sample frames uniformly and feed them to a VLM along with the question, incur significant token overhead. This forces aggressive downsampling of long videos, causing models to miss fine-grained visual structure, subtle event transitions, and key temporal cues. Recent works attempt to overcome these limitations through heuristic approaches; however, they lack explicit mechanisms for encoding temporal relationships and fail to provide any formal guarantees that the sampled context actually encodes the compositional or causal logic required by the question.
           </p>
           <p>
-  To address this gap, we introduce NeuS-V, a novel synthetic video evaluation metric that rigorously assesses text-to-video alignment using neuro-symbolic formal verification techniques. Our approach first converts the prompt into a formally defined Temporal Logic (TL) specification and translates the generated video into an automaton representation. Then, it evaluates the text-to-video alignment by formally checking the video automaton against the TL specification. Furthermore, we present a dataset of temporally extended prompts to evaluate state-of-the-art video generation models against our benchmark. We find that NeuS-V demonstrates a higher correlation by over 5&times; with human evaluations when compared to existing metrics. Our evaluation further reveals that current video generation models perform poorly on these temporally complex prompts, highlighting the need for future work in improving text-to-video generation capabilities.
+            To address these foundational gaps, we introduce NeuS-QA, a training-free, plug-and-play neuro-symbolic pipeline for LVQA. NeuS-QA first translates a natural language question into a logic specification that models the temporal relationship between frame-level events. Next, we construct a video automaton to model the video's frame-by-frame event progression, and finally employ model checking to compare the automaton against the specification to identify all video segments that satisfy the question's logical requirements. Only these logic-verified segments are submitted to the VLM, thus improving interpretability, reducing hallucinations, and enabling compositional reasoning without modifying or fine-tuning the model. Experiments on the LongVideoBench and CinePile LVQA benchmarks show that NeuS-QA significantly improves performance by over 10%, particularly on questions involving event ordering, causality, and multi-step reasoning.
           </p>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="container is-max-desktop">
-  <div class="rows is-centered">
-    <div class="row">
-      <h2 class="title is-3 has-text-centered">Methodology</h2>
-    </div>
-    <br>
-    <div class="row">
-      <p>
-        We introduce a novel metric for assessing text-to-video alignment using formal verification. Given a prompt, NeuS-V translates it into a temporal logic specification &Phi; and verifies the synthetic video, represented as an automaton, against it.
-      </p>
-    </div>
-
-    <br>
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <img src="static/images/flowchart.jpg" alt="Method Overview" class="zoomable-image">
-      </div>
-    </div>
-    <p>
-      <ul class="dashed-list">
-        <li> <b>Step 1: </b>We translate the text prompt into a set of atomic propositions and a TL specification through Prompt Understanding via temporal Logic Specification (PULS).
-        </li>
-        <li> <b> Step 2: </b>We obtain a semantic confidence score for each atomic proposition using a VLM applied to each sequence of frames
-        </li>
-        <li> <b> Step 3: </b>We construct a video automaton representation for the synthetic video.
-        </li>
-        <li> <b> Step 4: </b>We compute the satisfaction probability by formally verifying the constructed video automaton against the TL specification.
-        </li>
-        <li> <b> Step 5: </b>Finally, we calibrate the satisfaction probability by mapping it to the final evaluation score from NeuS-V.
-        </li>
-      </ul>
-    </p>
-  </div>
-  <br>
-</div>
-<br><br>
-
-<section class="hero is-light is-small">
-  <div class="columns is-centered has-text-centered">
-    <div class="hero-body">
-      <div class="container">
-      <h2 class="title is-3 has-text-centered">NeuS-V Examples</h2>
-        <div id="results-carousel" class="carousel results-carousel">
-          <div class="item item-video1">
-            <video poster="" id="viedo1" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/bird.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">A bird singing until it flies away to another branch</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.895</h5>
-          </div>
-          <div class="item item-chair-video2">
-            <video poster="" id="chair-video2" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/bus.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">A bus stopping and passengers boarding from the curb</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.648</h5>
-          </div>
-          <div class="item item-video3">
-            <video poster="" id="video3" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/clock.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">Always a clock striking each hour with precision</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.077</h5>
-          </div>
-          <div class="item item-video4">
-            <video poster="" id="video4" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/caralarm.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">A car alarm sounding until it is deactivated</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.002</h5>
-          </div>
-          <div class="item item-video5">
-            <video poster="" id="video5" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/microwave.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">Always a microwave heating up dinner, and the timer counting down the minutes</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.679</h5>
-          </div>
-          <div class="item item-video6">
-            <video poster="" id="video6" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/belt.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">Always a conveyor belt moving products along the line, until a sensor detects an error, and then the entire system comes to a halt</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.151</h5>
-          </div>
-          <div class="item item-video7">
-            <video poster="" id="video7" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/camera.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">A camera clicking and the shutter capturing images</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.017</h5>
-          </div>
-          <div class="item item-video8">
-            <video poster="" id="video8" autoplay controls muted loop playsinline height="100%">
-              <source src="./static/videos/ocean.mp4"
-                      type="video/mp4">
-            </video>
-            <h6 class="title is-6 has-text-centered" style="margin-top: 1rem; margin-bottom: 0.5rem; padding-left: 0.5rem; padding-right: 0.5rem;">The ocean waves gently lapping at the shore, until a storm bursts in, and then lightning flashes across the sky</h5>
-            <h5 class="title is-5 has-text-centered" style="margin: 0.5rem 0;">NeuS-V Score: 0.937</h5>
+        <div class="content has-text-centered">
+          <div class="columns is-centered">
+            <div class="column is-three-quarters">
+              <img src="static/images/running_example.png" class="zoomable-image">
+            </div>
           </div>
         </div>
       </div>
@@ -280,27 +168,38 @@
   </div>
 </section>
 
-<br><br>
+<br>
 <div class="container is-max-desktop">
   <div class="row">
     <h2 class="title is-3 has-text-centered">Key Capabilities</h2>
   </div>
   <br>
+  <h3 class="title is-4 has-text-centered">Quantitative Results</h3>
+  <p>
+  NeuS-QA outperforms existing state-of-the-art LVQA methods, including both foundation models and structured reasoning frameworks, by a significant margin on the LongVideoBench benchmark. NeuS-QA particularly excelling in questions that require complex temporal reasoning.
+  </p>
+  <br>
+    <div class="columns is-centered">
+      <div class="column is-four-fifths">
+        <img src="static/images/main_table.png" class="zoomable-image">
+      </div>
+  </div>
+
   <div class="columns is-centered">
     <div class="column">
       <div class="content">
-        <h3 class="title is-4 has-text-centered">Four Evaluation Modes</h3>
+        <h3 class="title is-4 has-text-centered">Generalization to Narrative Video</h3>
         <p>
-        NeuS-V rigorously evaluates videos across four distinct evaluation modes, allowing the benchmark to cover a vast variety of scenarios.
+        NeuS-QA demonstrates strong generalization to narrative video domains, such as movies and TV shows, as shown by it outperforming all other models on the CinePile benchmark.
         </p>
       </div>
     </div>
     <div class="column">
       <div class="columns is-centered">
         <div class="column content">
-          <h3 class="title is-4 has-text-centered">Correlation with Human Annotation</h3>
+          <h3 class="title is-4 has-text-centered">Impact of VLM Backbone</h3>
           <p>
-          NeuS-V consistently shows a stronger alignment with human text-to-video annotations compared to existing benchmarks (Pearson coefficients displayed at the top of each plot).
+          NeuS-QA is model-agnostic and works with any VLM backbone. Using InternVL2-8B for automaton construction results in the highest accuracy when evaluated with GPT-4o.
           </p>
         </div>
       </div>
@@ -311,7 +210,7 @@
       <div class="columns is-centered">
         <div class="column is-four-fifths">
           <div class="content">
-            <img src="static/images/violin.png" class="zoomable-image">
+            <img src="static/images/narrative.png" class="zoomable-image">
           </div>
         </div>
       </div>
@@ -319,21 +218,10 @@
     <div class="column">
       <div class="columns is-centered">
         <div class="column content">
-          <img src="static/images/human_corr.png" class="zoomable-image">
+          <img src="static/images/backbone.png" class="zoomable-image">
         </div>
       </div>
     </div>
-  </div>
-
-  <h3 class="title is-4 has-text-centered">Diverse Theme and Complexity Benchmarks</h3>
-  <p>
-  NeuS-V has been thoroughly benchmarked. These performance metrics reflect the full 360-prompt set, while correlations to human evaluations (in parentheses) are computed on a 160-prompt subset. NeuS-V enjoys high correlation across all themes and complexities.
-  </p>
-  <br>
-    <div class="columns is-centered">
-      <div class="column is-four-fifths">
-        <img src="static/images/table.png" class="zoomable-image">
-      </div>
   </div>
 </div>
 <br>
@@ -341,12 +229,11 @@
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@inproceedings{sharan2024neuro,
-  author    = {Sharan, S.P. and Choi, Minkyu and Shah, Sahil and Goel, Harsh and Omama, Mohammad and Chinchali, Sandeep},
-  title     = {Neuro-Symbolic Evaluation of Text-to-Video Models using Formal Verification}, 
-  journal   = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  month     = {June},
-  year      = {2025},
+    <pre><code>@inproceedings{shah2025neus,
+  title     = {NeuS-QA: Grounding Long-Form Video Understanding in Temporal Logic and Neuro-Symbolic Reasoning},
+  author    = {Shah, Sahil and Sharan, SP and Goel, Harsh and Choi, Minkyu and Munir, Mustafa and Pasula, Manvik and Marculescu, Radu and Chinchali, Sandeep},
+  booktitle = {Proceedings of the AAAI Conference on Artificial Intelligence},
+  year      = {2026}
 }</code></pre>
   </div>
 </section>
@@ -419,3 +306,5 @@
 
 </body>
 </html>
+
+
