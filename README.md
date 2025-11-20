@@ -2,7 +2,7 @@
 
 # NeuS-QA: Grounding Long-Form Video Understanding in Temporal Logic and Neuro-Symbolic Reasoning 
 
-[![arXiv](https://img.shields.io/badge/arXiv-2509.18041-b31b1b.svg)](https://arxiv.org/abs/2509.18041) [![Paper](https://img.shields.io/badge/Paper-pdf-green.svg)](https://arxiv.org/pdf/2509.18041) [![Website](https://img.shields.io/badge/ProjectWebpage-neus--qa-orange.svg)](https://utaustin-swarmlab.github.io/neus-qa/) [![GitHub](https://img.shields.io/badge/Code-Source--Code-blue.svg)](https://github.com/UTAustin-SwarmLab/NeuS-QA)
+[![arXiv](https://img.shields.io/badge/arXiv-2509.18041-b31b1b.svg)](https://arxiv.org/abs/2509.18041) [![Paper](https://img.shields.io/badge/Paper-pdf-green.svg)](https://arxiv.org/pdf/2509.18041) [![Website](https://img.shields.io/badge/ProjectWebpage-neus--qa-orange.svg)](https://utaustin-swarmlab.github.io/NeuS-QA/) [![GitHub](https://img.shields.io/badge/Code-Source--Code-blue.svg)](https://github.com/UTAustin-SwarmLab/NeuS-QA)
 </div>
 
 ### Table of Contents
