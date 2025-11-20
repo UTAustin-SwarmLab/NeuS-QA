@@ -38,7 +38,11 @@ class LongVideoBench(Manager):
                         "question": item["question"],
                         "candidates": item["candidates"],
                         "correct_choice": item["correct_choice"],
-                        "video_path": video_path,
+                        "paths": {
+                            "video_path": video_path,
+                            "raw_video_path": os.path.join(self._dataset_path, "videos", item["video_path"]),
+                            "subtitle_path": os.path.join(self._dataset_path, "subtitles", item["subtitle_path"])
+                        },
                         "metadata": {
                             "video_id": item["video_id"],
                             "id": item["id"],
@@ -51,8 +55,6 @@ class LongVideoBench(Manager):
                             "starting_timestamp_for_subtitles": item["starting_timestamp_for_subtitles"],
                             "duration": item["duration"],
                             "view_count": item["view_count"],
-                            "raw_video_path": os.path.join(self._dataset_path, "videos", item["video_path"]),
-                            "subtitle_path": os.path.join(self._dataset_path, "subtitles", item["subtitle_path"])
                         }
                     }
 
@@ -104,20 +106,20 @@ class LongVideoBench(Manager):
                     id = hashlib.sha256(code.encode()).hexdigest()
                     entry["id"] = id + "_0"
                     entry["video_id"] = id
-                    entry["video_path"] = id + ".mp4"
+                    entry["paths"]["video_path"] = id + ".mp4"
 
 
                     self.crop_video(
                         entry_nsvs, 
-                        save_path=os.path.join(self._output_path_nsvqa, "videos", entry["video_path"]),
+                        save_path=os.path.join(self._output_path_nsvqa, "videos", entry["paths"]["video_path"]),
                         ground_truth=False
                     )
 
-                    if os.path.exists(os.path.join(self._output_path_nsvqa, "videos", entry["video_path"])): # if crop is successful
+                    if os.path.exists(os.path.join(self._output_path_nsvqa, "videos", entry["paths"]["video_path"])): # if crop is successful
                         if self.compile_position:
                             self.crop_video(
                                 entry_nsvs, 
-                                save_path=os.path.join(self._output_path_position, "videos", entry["video_path"]),
+                                save_path=os.path.join(self._output_path_position, "videos", entry["paths"]["video_path"]),
                                 ground_truth=True
                             )
 

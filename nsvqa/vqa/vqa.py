@@ -5,7 +5,6 @@ import base64
 import json
 import tqdm
 import cv2
-import os
 
 
 NUM_SAMPLES = 16
@@ -117,7 +116,7 @@ def run_experiment(data, vllm_client, output_path, eval):
     batch_args_all_calls = []
 
     for entry in data:
-        frames = load_video_frames(entry["video_path"], num_frames=NUM_SAMPLES)
+        frames = load_video_frames(entry["paths"]["video_path"], num_frames=NUM_SAMPLES)
         if not frames:
             continue
         for i in range(len(entry["candidates"])):
@@ -129,7 +128,7 @@ def run_experiment(data, vllm_client, output_path, eval):
     for i, entry in enumerate(data):
         predicted_answer = predicted_answers_all_calls[i]
         output_dict = {
-            "video_path": entry["video_path"],
+            "video_path": entry["paths"]["cropped_path"],
             "question": entry["question"],
             "candidates": entry["candidates"],
             "predicted_answer": predicted_answer
@@ -155,7 +154,7 @@ def run_experiment(data, vllm_client, output_path, eval):
         for entry in results:
             print(entry["predicted_answer"])
 
-def vqa(dataset_path, output_path, vlm_config, eval=True):
+def vqa(dataset_path, output_path, vlm_config, eval=False):
     with open(dataset_path, "r") as f:
         data = json.load(f)
 

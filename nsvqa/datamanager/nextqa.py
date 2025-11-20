@@ -38,8 +38,9 @@ class NextQA(Manager):
               entry["candidates"] = [item["a0"], item["a1"], item["a2"], item["a3"], item["a4"]]
               # if it is comma separated instead of list, use "entry["candidates"] = ",".join(item["a0"], item["a1"], item["a2"], item["a3"], item["a4"])"
               entry["correct_choice"] = int(item["answer"])
-              
-              entry["video_path"] = vid_to_path[int(item["video"])]
+
+              entry["paths"] = {}
+              entry["paths"]["video_path"] = vid_to_path[int(item["video"])]
               # no subtitles, and hence no burned either
 
               entry["metadata"] = {}

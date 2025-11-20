@@ -35,7 +35,8 @@ class CinePile(Manager):
             entry["question"] = item["question"]
             entry["candidates"] = list(item["choices"])
             entry["correct_choice"] = int(item["answer_key_position"]) # this is basically a string that holds something in a list format
-            entry["video_path"] = os.path.join(self._datatset_path, item["videoID"] + ".mp4")
+            entry["paths"] = {}
+            entry["paths"]["video_path"] = os.path.join(self._datatset_path, item["videoID"] + ".mp4")
             
             entry["metadata"] = {}
             entry["metadata"]["video_id"] = item["videoID"]
@@ -50,7 +51,7 @@ class CinePile(Manager):
             entry["metadata"]["full_id"] = i # the position in the full, untouched dataset
             entry["metadata"]["filtered_id"] = idx # the position in the filtered dataset
             
-            if os.path.exists(entry["video_path"]):
+            if os.path.exists(entry["paths"]["video_path"]):
                 data.append(entry)
             
         return data

@@ -10,7 +10,6 @@ from nsvqa.nsvs.video.frames_of_interest import FramesofInterest
 from nsvqa.utils.intersection import intersection_with_gaps
 from nsvqa.nsvs.video.video_frame import VideoFrame
 from nsvqa.nsvs.vlm.vllm_client import VLLMClient
-from nsvqa.nsvs.vlm.internvl import InternVL
 
 
 PRINT_ALL = False
