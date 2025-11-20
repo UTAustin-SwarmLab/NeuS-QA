@@ -29,7 +29,7 @@ class Manager(ABC):
             ranges.append((start, prev + 1))
             return ranges
 
-        input_path = entry["paths"]["video_path"]
+        input_path = entry["video_path"]
 
         # Step 1: Determine frames to keep
         if ground_truth:
@@ -102,7 +102,7 @@ class Manager(ABC):
             ranges.append((start, prev + 1))
             return ranges
 
-        input_path = entry["paths"]["video_path"]
+        input_path = entry["video_path"]
 
         # Determine important frames
         if hardset:

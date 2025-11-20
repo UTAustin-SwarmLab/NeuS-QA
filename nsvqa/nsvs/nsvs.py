@@ -21,7 +21,7 @@ def run_nsvs(
     video_path: str,
     proposition: list,
     specification: str,
-    model_name: str,
+    model: str,
     device: int,
     model_type: str = "dtmc",
     num_of_frame_in_sequence = 3,
@@ -37,7 +37,7 @@ def run_nsvs(
         print(f"Specification: {specification}\n")
         print(f"Video path: {video_path}\n")
 
-    vlm = VLLMClient(model=model_name, api_base=f"http://localhost:800{device}/v1")
+    vlm = VLLMClient(model=model, api_base=f"http://localhost:800{device}/v1")
 
     automaton = VideoAutomaton(include_initial_state=True)
     automaton.set_up(proposition_set=proposition)

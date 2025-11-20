@@ -1,11 +1,5 @@
-import datetime
+from nsvqa.puls.llm import LLM
 import json
-from pathlib import Path
-
-from tqdm import tqdm
-
-from nsvqa.target_identification.llm import LLM
-
 
 def clean_and_parse_json(raw_str):
     start = raw_str.find("{")
@@ -62,8 +56,7 @@ Expected Output (only output the following JSON structure — nothing else):
     explanation = response["explanation"]
 
     # Save the conversation history with timestamp
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    history_path = llm.save_history(f"conversation_history_{timestamp}.json")
+    history_path = llm.save_history("target")
 
     return {
         "frame_window": target_frame_window,
@@ -77,12 +70,8 @@ def identify_target(question, candidates, specification, conversation_history):
     history_path = conversation_history
     with open(history_path, "r") as f:
         history = json.load(f)
-    llm = LLM(
-        system_prompt=None,
-        save_dir="outputs/3_target_identification/longvideobench",
-        model="o1-mini-2024-09-12",
-        history=history,
-    )
+
+    llm = LLM(history=history)
 
     # Get target identification results
     result = process_datapoint(llm, question, candidates, specification)

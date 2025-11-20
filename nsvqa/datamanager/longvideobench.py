@@ -38,11 +38,7 @@ class LongVideoBench(Manager):
                         "question": item["question"],
                         "candidates": item["candidates"],
                         "correct_choice": item["correct_choice"],
-                        "paths": {
-                            "raw_video_path": os.path.join(self._dataset_path, "videos", item["video_path"]),
-                            "subtitle_path": os.path.join(self._dataset_path, "subtitles", item["subtitle_path"]),
-                            "video_path": video_path
-                        },
+                        "video_path": video_path,
                         "metadata": {
                             "video_id": item["video_id"],
                             "id": item["id"],
@@ -54,7 +50,9 @@ class LongVideoBench(Manager):
                             "duration_group": item["duration_group"],
                             "starting_timestamp_for_subtitles": item["starting_timestamp_for_subtitles"],
                             "duration": item["duration"],
-                            "view_count": item["view_count"]
+                            "view_count": item["view_count"],
+                            "raw_video_path": os.path.join(self._dataset_path, "videos", item["video_path"]),
+                            "subtitle_path": os.path.join(self._dataset_path, "subtitles", item["subtitle_path"])
                         }
                     }
 

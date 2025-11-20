@@ -2,10 +2,10 @@ from nsvqa.target_identification.target_identification import *
 from nsvqa.nsvs.model_checker.frame_validator import *
 from nsvqa.datamanager.longvideobench import *
 from nsvqa.nsvs.video.read_video import *
-from nsvqa.datamanager.cinepile import *
 from nsvqa.nsvs.vlm.obj import *
 from nsvqa.nsvs.nsvs import *
 from nsvqa.puls.puls import *
+from nsvqa.vqa.vqa import *
 
 import json
 import os
@@ -31,21 +31,23 @@ def exec_target_identification(entry): # Step 2
     entry["target_identification"]["explanation"] = output["explanation"]
     entry["target_identification"]["conversation_history"] = os.path.join(os.getcwd(), output["saved_path"])
 
-def exec_nsvs(entry, sample_rate, device, model_name): # Step 3
-    print(entry["paths"]["video_path"])
-    reader = Mp4Reader(path=entry["paths"]["video_path"], sample_rate=sample_rate)
+def exec_nsvs(entry, sample_rate, device, model): # Step 3
+    print(entry["video_path"])
+    reader = Mp4Reader(path=entry["video_path"], sample_rate=sample_rate)
     video_data = reader.read_video()
+    if "metadata" not in entry:
+        entry["metadata"] = {}
     entry["metadata"]["fps"] = video_data["video_info"]["fps"]
     entry["metadata"]["frame_count"] = video_data["video_info"]["frame_count"]
 
     try:
         output, indices = run_nsvs(
             video_data,
-            entry["paths"]["video_path"],
+            entry["video_path"],
             entry["puls"]["proposition"],
             entry["puls"]["specification"],
             device=device,
-            model_name=model_name,
+            model=model,
         )
     except Exception as e:
         entry["metadata"]["error"] = repr(e)
@@ -77,37 +79,54 @@ def exec_merge(entry): # Step 4
     else:
         entry["frames_of_interest"] = [-1]
 
-def run_nsvqa(output_dir):
-    loader = LongVideoBench()
-    # loader = CinePile()
-    data = loader.load_data()
+def run_nsvqa(output_dir, current_split, total_splits, vlm_config):
+    # loader = LongVideoBench()
+    # data = loader.load_data()
+    data = [
+        {
+            "video_path": "/nas/mars/dataset/longvideobench/burn-subtitles/mH9LdC7IFH8.mp4",
+            "question": "In the scene, a man wearing glasses and dressed in a black suit is speaking to the camera under the golden sky. After the subtitle 'of that still uh in tanks and will be,' what happens on the screen?",
+            "candidates": [
+                "The screen switches to four cameras",
+                "The screen switches to two cameras",
+                "The camera view is enlarged",
+                "The screen switches to three cameras",
+                "The camera view is reduced"
+            ]
+        }
+    ]
     
     output = []
-
-    starting = 0
-    ending = len(data)-1
+    starting = (len(data) * (current_split-1)) // total_splits
+    ending = (len(data) * current_split) // total_splits
     for i in range(starting, ending+1):
         print("\n" + "*"*50 + f" {i}/{len(data)-1} " + "*"*50)
         entry = data[i]
         exec_puls(entry)
         exec_target_identification(entry)
-        exec_nsvs(entry, sample_rate=1, device=0, model_name="OpenGVLab/InternVL2_5-8B")
+        exec_nsvs(entry, sample_rate=1, device=vlm_config[0], model=vlm_config[1])
         exec_merge(entry)
         output.append(entry)
-        # with open(f"junk/{i}.json", "w") as f:
-        #     json.dump(output, f, indent=4)
 
     with open(output_dir, "w") as f:
         json.dump(output, f, indent=4)
 
-def postprocess(output_dir):
-    loader = LongVideoBench()
-    loader.postprocess_data(output_dir)
+def postprocess(nsvqa_dir, vqa_dir, vlm_config):
+    # loader = LongVideoBench()
+    # loader.postprocess_data(output_dir)
+    vqa(nsvqa_dir, vqa_dir, vlm_config, eval=False)
+    
 
 def main():
-    output_dir = "/nas/mars/experiment_result/nsvqa/5_full_output/longvideobench_rebuttal_1.json"
-    run_nsvqa(output_dir)
-    postprocess(output_dir)
+    current_split = 1
+    total_splits = 30
+    vlm_config = (0, "OpenGVLab/InternVL3_5-14B")
+
+    nsvqa_dir = f"/nas/mars/experiment_result/nsvqa/9_post_submission/nsvqa_output/nsvqa_output_{current_split}.json"
+    vqa_dir = f"/nas/mars/experiment_result/nsvqa/9_post_submission/vqa_output/vqa_output_{current_split}.json"
+
+    run_nsvqa(nsvqa_dir, current_split, total_splits, vlm_config)
+    postprocess(nsvqa_dir, vqa_dir, vlm_config)
 
 if __name__ == "__main__":
     main()

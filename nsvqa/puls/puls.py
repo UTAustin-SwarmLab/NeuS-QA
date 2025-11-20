@@ -1,6 +1,5 @@
 from nsvqa.puls.llm import *
 from nsvqa.puls.prompts import *
-from openai import OpenAI
 import json
 import os
 import re
@@ -50,8 +49,7 @@ def PULS(prompt, openai_key=None):
     if openai_key:
         os.environ["OPENAI_API_KEY"] = openai_key
 
-    client = OpenAI()
-    llm = LLM(client)
+    llm = LLM()
 
     full_prompt = find_prompt(prompt)
     llm_output = llm.prompt(full_prompt)

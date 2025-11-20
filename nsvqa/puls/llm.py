@@ -1,13 +1,18 @@
+from openai import OpenAI
 import datetime
 import json
 import os
 
 
 class LLM:
-    def __init__(self, client, save_dir="outputs/1_puls/longvideobench/conversation_history"):
+    def __init__(self, model="gpt-4o", history=None, save_dir="/nas/mars/experiment_result/nsvqa/9_post_submission/llm_conversation_history/"):
         """Initialize LLM"""
-        self.client = client
-        self.history = []
+        self.client = OpenAI()
+        self.model = model
+        if history:
+            self.history = history
+        else:
+            self.history = []
         self.save_dir = save_dir
         if save_dir:
             os.makedirs(save_dir, exist_ok=True)
@@ -18,7 +23,7 @@ class LLM:
         self.history.append(user_message)
 
         response = self.client.chat.completions.create(
-            model="o1-mini",
+            model=self.model,
             messages=self.history,
             store=False,
         )
@@ -28,10 +33,14 @@ class LLM:
 
         return assistant_response
 
-    def save_history(self, filename="conversation_history.json"):
+    def save_history(self, suffix=""):
         """Save conversation history to a JSON file and return the save path"""
         if not self.save_dir:
             return None
+        if suffix:
+            filename = f"conversation_history_target_{suffix}.json"
+        else:
+            filename = "conversation_history_target.json"
 
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
         base_name, extension = os.path.splitext(filename)
